@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block content %}<h2>Officer dashboard</h2>{% for deed, items in flagged %}{% if items %}<div class="card"><b>{{ deed.deed_id }} / {{ deed.plot_id }}</b>{% for flag in items %}<p class="bad">{{ flag.code }} — {{ flag.en }}<br>{{ flag.bn }}</p>{% endfor %}</div>{% endif %}{% endfor %}{% endblock %}
