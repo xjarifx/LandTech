@@ -163,8 +163,7 @@ def report(request: Request, plot_id: str):
     plot = db.execute("SELECT * FROM plots WHERE plot_id=?", (plot_id,)).fetchone()
     deeds = [row_json(r) for r in db.execute("SELECT * FROM deeds WHERE plot_id=? ORDER BY registered_at", (plot_id,))]
     plot_data = row_json(plot) if plot else None
-    all_deeds = [row_json(r) for r in db.execute("SELECT * FROM deeds")]
-    report_flags = flags(plot_data, all_deeds[:-1], deeds[-1]) if plot_data and deeds else []
+    report_flags = flags(plot_data, deeds[:-1], deeds[-1]) if plot_data and deeds else []
     return templates.TemplateResponse(request=request, name="report.html",
         context={"plot": plot_data, "deeds": deeds, "flags": report_flags, "dummy": True})
 
